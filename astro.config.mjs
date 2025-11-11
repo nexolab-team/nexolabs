@@ -5,5 +5,6 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://nexolabs.github.io',
+  site: 'https://nexolab-team.github.io',
+  base: '/nexolabs',
 });

@@ -1,7 +1,7 @@
 <h1 align="center"> ⛳ NexoLabs</h1>
 
 <p align="center">
-<a href="https://github.com/nexolab-team/nexolabs"><img src="public/assets/avatars/git.png" width="120" /></a><br />
+<a href="https://github.com/nexolab-team/nexolabs"><img src="public/assets/avatars/git.png" width="400" /></a><br />
 <i>Modern CTF team website with cyberpunk aesthetics</i><br />
 <i>Showcase writeups, achievements, and team members</i><br /><br />
 <b>🌐 <a href="https://nexolab-team.github.io/nexolabs">nexolab-team.github.io/nexolabs</a></b>

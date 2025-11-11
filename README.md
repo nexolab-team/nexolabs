@@ -7,9 +7,6 @@
 <b>🌐 <a href="https://nexolab-team.github.io/nexolabs/">nexolab-team.github.io/nexolabs</a></b>
 </p>
 
-<p align="center">
-<img src="public/assets/avatars/preview.png" alt="NexoLabs Preview" width="800" />
-</p>
 
 <p align="center">
 <img src="https://github.com/nexolab-team/nexolabs/actions/workflows/deploy.yml/badge.svg" alt="Deploy Status" />
@@ -17,6 +14,10 @@
 </p>
 
 > **Decrypt. Dissect. Dominate.** - A modern, cyberpunk-themed website for showcasing CTF writeups and team achievements.
+
+<p align="center">
+<img src="public/assets/avatars/preview.png" alt="NexoLabs Preview" width="800" />
+</p>
 
 ## Motive
 

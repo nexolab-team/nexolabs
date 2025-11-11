@@ -8,6 +8,10 @@
 </p>
 
 <p align="center">
+<img src="public/assets/avatars/preview.png" alt="NexoLabs Preview" width="800" />
+</p>
+
+<p align="center">
 <img src="https://github.com/nexolab-team/nexolabs/actions/workflows/deploy.yml/badge.svg" alt="Deploy Status" />
 <img src="https://github.com/nexolab-team/nexolabs/actions/workflows/ci.yml/badge.svg" alt="CI Status" />
 </p>

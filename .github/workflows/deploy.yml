@@ -40,15 +40,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Optimize images (optional)
-        run: |
-          # Optimize images into WebP/AVIF during CI (requires sharp)
-          if [ -f package.json ]; then
-            npm run optimize-images || echo "Image optimization failed or skipped";
-          fi
-
       - name: Build Astro site
         run: npm run build
+        env:
+          NODE_ENV: production
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -24,7 +24,7 @@ interface Props {
 const { title, category, difficulty, author, date, slug, description, tags } = Astro.props;
 const base = import.meta.env.BASE_URL || '';
 
-const difficultyColor = {
+const difficultyColor: Record<string, string> = {
   Easy: 'text-green-400',
   Medium: 'text-yellow-400',
   Hard: 'text-orange-400',
@@ -69,7 +69,7 @@ const readingTime = Math.ceil(wordCount / wordsPerMinute);
     
     {tags && tags.length > 0 && (
       <div class="flex flex-wrap gap-2 mb-4">
-        {tags.slice(0, 3).map(tag => (
+        {tags.slice(0, 3).map((tag: string) => (
           <span class="tag">#{tag}</span>
         ))}
       </div>

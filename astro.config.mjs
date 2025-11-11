@@ -12,7 +12,7 @@ export default defineConfig({
       // Fix image paths to include base
       () => {
         return (tree) => {
-          const visit = (node) => {
+          const visit = (/** @type {any} */ node) => {
             if (node.type === 'element' && node.tagName === 'img' && node.properties && node.properties.src) {
               const src = node.properties.src;
               // Only modify absolute paths that don't already have the base

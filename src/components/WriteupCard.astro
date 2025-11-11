@@ -22,6 +22,7 @@ interface Props {
 }
 
 const { title, category, difficulty, author, date, slug, description, tags } = Astro.props;
+const base = import.meta.env.BASE_URL || '';
 
 const difficultyColor = {
   Easy: 'text-green-400',
@@ -57,7 +58,7 @@ const readingTime = Math.ceil(wordCount / wordsPerMinute);
     </div>
     
     <h3 class="text-xl font-orbitron text-white mb-3 hover:text-cyan-400 transition-colors">
-      <a href={`/writeups/${slug}`}>{title}</a>
+      <a href={`${base}/writeups/${slug}`}>{title}</a>
     </h3>
     
     {description && (
@@ -75,7 +76,7 @@ const readingTime = Math.ceil(wordCount / wordsPerMinute);
     )}
     
     <div class="flex items-center justify-between text-xs font-mono text-gray-500">
-      <a href={`/about#${author.toLowerCase()}`} class="author-link">
+      <a href={`${base}/about#${author.toLowerCase()}`} class="author-link">
         by {author}
       </a>
       <span>{date}</span>
@@ -84,7 +85,7 @@ const readingTime = Math.ceil(wordCount / wordsPerMinute);
   
   <div class="border-t border-cyan-500/30 p-4 flex items-center justify-between">
     <a 
-      href={`/writeups/${slug}`}
+      href={`${base}/writeups/${slug}`}
       class="text-cyan-400 hover:text-magenta-400 font-mono text-sm uppercase tracking-wider transition-colors inline-flex items-center gap-2"
     >
       Read Writeup

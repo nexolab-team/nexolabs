@@ -34,8 +34,10 @@ optimize_images() {
     echo "📁 Processing directory: $dir"
     
     # Process PNG and JPG files
-    for img in "$dir"/*.{png,jpg,jpeg,PNG,JPG,JPEG} 2>/dev/null; do
-        [ -e "$img" ] || continue
+    shopt -s nullglob
+    for ext in png jpg jpeg PNG JPG JPEG; do
+        for img in "$dir"/*.$ext; do
+            [ -e "$img" ] || continue
         
         filename=$(basename "$img")
         echo "  ⚙️  Optimizing: $filename"
@@ -48,10 +50,11 @@ optimize_images() {
         cwebp -q $quality "$img" -o "$webp_name" 2>/dev/null
         
         echo "  ✅ Optimized: $filename"
+        done
     done
     
     # Optimize existing WebP files
-    for img in "$dir"/*.webp 2>/dev/null; do
+    for img in "$dir"/*.webp; do
         [ -e "$img" ] || continue
         
         filename=$(basename "$img")

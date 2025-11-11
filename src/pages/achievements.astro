@@ -25,6 +25,9 @@ const latestDate = allWriteups.length > 0
 const dynamicAchievements = await generateAchievements();
 const stats = await getAllStats();
 const hasPlatforms = hasAnyPlatformConnected();
+
+// Get base URL for asset paths
+const base = import.meta.env.BASE_URL || '';
 ---
 
 <Layout title="Achievements - NexoLabs">
@@ -132,40 +135,40 @@ const hasPlatforms = hasAnyPlatformConnected();
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Real Certification Images - Supports .jpg, .jpeg, .png, .webp, .gif -->
-          <div class="cert-card-img" data-cert="/assets/certs/cert1.jpg">
-            <img src="/assets/certs/cert1.jpg" alt="CTF Achievement Certificate" class="cert-image" loading="lazy" />
+          <div class="cert-card-img" data-cert={`${base}/assets/certs/cert1.jpg`}>
+            <img src={`${base}/assets/certs/cert1.jpg`} alt="CTF Achievement Certificate" class="cert-image" loading="lazy" />
             <div class="cert-info">
               <h3 class="cert-name">CTF Achievement</h3>
               <p class="cert-holder">NexoLabs Team</p>
             </div>
           </div>
           
-          <div class="cert-card-img" data-cert="/assets/certs/cert2.webp">
-            <img src="/assets/certs/cert2.webp" alt="Security Training Certificate" class="cert-image" loading="lazy" />
+          <div class="cert-card-img" data-cert={`${base}/assets/certs/cert2.webp`}>
+            <img src={`${base}/assets/certs/cert2.webp`} alt="Security Training Certificate" class="cert-image" loading="lazy" />
             <div class="cert-info">
               <h3 class="cert-name">Security Training</h3>
               <p class="cert-holder">NexoLabs Team</p>
             </div>
           </div>
           
-          <div class="cert-card-img" data-cert="/assets/certs/cert3.webp">
-            <img src="/assets/certs/cert3.webp" alt="Penetration Testing Certificate" class="cert-image" loading="lazy" />
+          <div class="cert-card-img" data-cert={`${base}/assets/certs/cert3.webp`}>
+            <img src={`${base}/assets/certs/cert3.webp`} alt="Penetration Testing Certificate" class="cert-image" loading="lazy" />
             <div class="cert-info">
               <h3 class="cert-name">Penetration Testing</h3>
               <p class="cert-holder">NexoLabs Team</p>
             </div>
           </div>
           
-          <div class="cert-card-img" data-cert="/assets/certs/cert4.webp">
-            <img src="/assets/certs/cert4.webp" alt="Ethical Hacking Certificate" class="cert-image" loading="lazy" />
+          <div class="cert-card-img" data-cert={`${base}/assets/certs/cert4.webp`}>
+            <img src={`${base}/assets/certs/cert4.webp`} alt="Ethical Hacking Certificate" class="cert-image" loading="lazy" />
             <div class="cert-info">
               <h3 class="cert-name">Ethical Hacking</h3>
               <p class="cert-holder">NexoLabs Team</p>
             </div>
           </div>
           
-          <div class="cert-card-img" data-cert="/assets/certs/cert5.webp">
-            <img src="/assets/certs/cert5.webp" alt="Advanced Security Certificate" class="cert-image" loading="lazy" />
+          <div class="cert-card-img" data-cert={`${base}/assets/certs/cert5.webp`}>
+            <img src={`${base}/assets/certs/cert5.webp`} alt="Advanced Security Certificate" class="cert-image" loading="lazy" />
             <div class="cert-info">
               <h3 class="cert-name">Advanced Security</h3>
               <p class="cert-holder">NexoLabs Team</p>

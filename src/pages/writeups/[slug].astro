@@ -1,0 +1,275 @@
+<!--
+┌── Message from havoc ────────────────────────────────────────────────────┐
+│                                                                                │
+│   Hello, me and my team have spent countless hours in designing this website   │
+│   Please don't copy it, make something original from scratch                   │
+│   It is not that hard really!!                                                 │
+│                                                                                │
+└────────────────────────────────────────────────────────────────────────────────┘
+-->
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const writeups = await getCollection('writeups');
+  return writeups.map(writeup => ({
+    params: { slug: writeup.slug },
+    props: { writeup },
+  }));
+}
+
+const { writeup } = Astro.props;
+const site = import.meta.env.SITE || '';
+const canonicalUrl = site ? `${site}/writeups/${writeup.slug}` : undefined;
+const ogImage = writeup.data.image ?? '/favicon.svg';
+const { Content } = await writeup.render();
+
+const difficultyColor = {
+  Easy: 'text-green-400',
+  Medium: 'text-yellow-400',
+  Hard: 'text-orange-400',
+  Insane: 'text-red-400',
+};
+---
+
+<Layout title={`${writeup.data.title} - NexoLabs`} description={writeup.data.description} canonical={canonicalUrl} image={ogImage} author={writeup.data.author}>
+  <article class="py-20 px-6">
+    <div class="container mx-auto max-w-4xl">
+      <!-- Header -->
+      <div class="mb-12">
+        <div class="flex items-center gap-4 mb-6">
+          <a href="/writeups" class="text-cyan-400 hover:text-magenta-400 font-mono text-sm uppercase transition-colors">
+            ← Back to Writeups
+          </a>
+        </div>
+        
+        <div class="flex items-center gap-4 mb-4 flex-wrap">
+          <span class="px-4 py-2 bg-cyan-500/20 border border-cyan-400 text-cyan-400 font-mono text-sm uppercase rounded">
+            {writeup.data.category}
+          </span>
+          <span class={`px-4 py-2 bg-black/50 border font-mono text-sm uppercase rounded ${difficultyColor[writeup.data.difficulty]} border-current`}>
+            {writeup.data.difficulty}
+          </span>
+        </div>
+        
+        <h1 class="text-4xl md:text-6xl font-orbitron text-cyan-400 mb-6">
+          {writeup.data.title}
+        </h1>
+        
+        <div class="flex items-center gap-6 text-gray-400 font-mono text-sm">
+          <span>By <a class="text-cyan-400 hover:text-magenta-400" href={`/about#${String(writeup.data.author).toLowerCase()}`}>{writeup.data.author}</a></span>
+          <span>•</span>
+          <span>{writeup.data.date}</span>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="prose prose-invert prose-cyan max-w-none">
+        <div class="writeup-content">
+          <Content />
+        </div>
+      </div>
+
+      <!-- Footer Navigation -->
+      <div class="mt-16 pt-8 border-t border-cyan-500/30">
+        <a href="/writeups" class="cyber-button">
+          ← View All Writeups
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style is:global>
+  .writeup-content {
+    @apply text-gray-300 font-mono leading-relaxed;
+  }
+  
+  .writeup-content h2 {
+    @apply text-3xl font-orbitron text-cyan-400 mt-12 mb-6;
+  }
+  
+  .writeup-content h3 {
+    @apply text-2xl font-orbitron text-magenta-400 mt-8 mb-4;
+  }
+  
+  .writeup-content h4 {
+    @apply text-xl font-orbitron text-purple-400 mt-6 mb-3;
+  }
+  
+  .writeup-content p {
+    @apply mb-6 text-lg;
+  }
+  
+  .writeup-content ul, .writeup-content ol {
+    @apply mb-6 ml-6 space-y-2;
+  }
+  
+  .writeup-content li {
+    @apply text-gray-300;
+  }
+  
+  .writeup-content ul li::marker {
+    @apply text-cyan-400;
+  }
+  
+  .writeup-content a {
+    @apply text-cyan-400 hover:text-magenta-400 underline transition-colors;
+  }
+  
+  .writeup-content code {
+    @apply bg-black/50 border border-cyan-500/30 px-2 py-1 rounded text-cyan-400 text-sm;
+  }
+  
+  .writeup-content pre {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg p-6 overflow-x-auto mb-6 relative;
+    @apply hover:border-magenta-400/50 transition-all duration-300;
+  }
+  
+  .writeup-content pre code {
+    @apply bg-transparent border-none p-0 text-sm;
+    display: block;
+    padding-right: 3.5rem;
+  }
+  
+  .copy-button {
+    @apply absolute top-2 right-2 p-1 rounded bg-cyan-500/10 border border-cyan-400/40;
+    @apply text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all duration-200;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 1;
+    font-size: 0.7rem;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .copy-button:hover {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    animation: copyPulse 0.6s ease-in-out;
+  }
+  
+  .copy-button.copied {
+    @apply bg-green-500/20 border-green-400/50 text-green-400;
+    animation: copySuccess 0.4s ease-out;
+  }
+  
+  @keyframes copyPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  
+  @keyframes copySuccess {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2) rotate(5deg); }
+    100% { transform: scale(1); }
+  }
+  
+  .writeup-content blockquote {
+    @apply border-l-4 border-cyan-400 pl-6 py-2 italic text-gray-400 my-6;
+  }
+  
+  .writeup-content img {
+    @apply rounded-lg border border-cyan-500/30 my-8 w-full;
+    @apply hover:border-magenta-400/50 transition-all duration-300;
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.1);
+  }
+  
+  .writeup-content img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 255, 255, 0.2);
+  }
+  
+  .writeup-content figure {
+    @apply my-8;
+  }
+  
+  .writeup-content figcaption {
+    @apply text-center text-gray-500 font-mono text-sm mt-2;
+  }
+  
+  .writeup-content table {
+    @apply w-full border-collapse my-8;
+  }
+  
+  .writeup-content th {
+    @apply bg-cyan-500/20 border border-cyan-500/30 px-4 py-2 text-left text-cyan-400;
+  }
+  
+  .writeup-content td {
+    @apply border border-cyan-500/30 px-4 py-2;
+  }
+  
+  .writeup-content hr {
+    @apply border-cyan-500/30 my-8;
+  }
+</style>
+
+<style>
+  .cyber-button {
+    @apply px-8 py-4 bg-cyan-500/20 border-2 border-cyan-400 text-cyan-400;
+    @apply font-mono uppercase tracking-wider rounded-lg;
+    @apply hover:bg-cyan-400 hover:text-black transition-all duration-300;
+    display: inline-block;
+    text-shadow: 0 0 10px currentColor;
+  }
+  
+  .cyber-button:hover {
+    box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+  }
+  
+</style>
+
+<script>
+  // Add copy buttons to code blocks
+  function addCopyButtons() {
+    const codeBlocks = document.querySelectorAll('.writeup-content pre');
+    
+    codeBlocks.forEach((block) => {
+      
+      // Create copy button
+      const button = document.createElement('button');
+      button.className = 'copy-button';
+      button.innerHTML = `
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+      `;
+      button.setAttribute('aria-label', 'Copy code');
+      
+      button.addEventListener('click', async () => {
+        const codeElement = block.querySelector('code');
+        const text = codeElement?.textContent || '';
+        
+        try {
+          await navigator.clipboard.writeText(text);
+          button.classList.add('copied');
+          button.innerHTML = `
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          `;
+          
+          setTimeout(() => {
+            button.classList.remove('copied');
+            button.innerHTML = `
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            `;
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
+      });
+      
+      block.appendChild(button);
+    });
+  }
+  
+  // Run when page loads
+  document.addEventListener('DOMContentLoaded', addCopyButtons);
+</script>

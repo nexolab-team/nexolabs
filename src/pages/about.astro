@@ -1,0 +1,443 @@
+<!--
+┌── Message from havoc ────────────────────────────────────────────────────┐
+│                                                                                │
+│   Hello, me and my team have spent countless hours in designing this website   │
+│   Please don't copy it, make something original from scratch                   │
+│   It is not that hard really!!                                                 │
+│                                                                                │
+└────────────────────────────────────────────────────────────────────────────────┘
+-->
+
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About - NexoLabs">
+  <section class="py-20 px-6">
+    <div class="container mx-auto max-w-4xl">
+      <h1 class="text-5xl md:text-7xl font-orbitron text-cyan-400 mb-8">
+        <span class="text-magenta-400">//</span> About NexoLabs
+      </h1>
+      
+      <div class="bg-black/50 border border-cyan-500/30 rounded-lg p-8 mb-12 backdrop-blur-md">
+        <h2 class="text-3xl font-orbitron text-magenta-400 mb-4">Our Mission</h2>
+        <p class="text-gray-300 text-lg leading-relaxed font-mono mb-6">
+          NexoLabs is a cybersecurity collective dedicated to pushing the boundaries of 
+          offensive security through Capture The Flag competitions and penetration testing. 
+          We believe in the power of shared knowledge and technical excellence.
+        </p>
+        <p class="text-gray-300 text-lg leading-relaxed font-mono">
+          Our approach combines deep technical expertise with creative problem-solving, 
+          allowing us to dissect complex vulnerabilities and reverse engineer sophisticated 
+          systems. Every challenge we solve becomes a learning opportunity for the community.
+        </p>
+      </div>
+
+      <!-- Team Members -->
+      <!-- 
+        HOW TO ADD CUSTOM PROFILE PICTURES:
+        1. Add your image to: /public/assets/avatars/
+        2. Supported formats: .webp, .jpg, .png, .svg, .gif
+        3. Recommended size: 400x400px (square)
+        4. Update the src attribute below to match your filename
+        
+        Example: If you add "john.jpg", change:
+        src="/assets/avatars/member2.webp" 
+        to 
+        src="/assets/avatars/john.jpg"
+      -->
+      <h2 class="text-4xl font-orbitron text-cyan-400 mb-8">
+        <span class="text-magenta-400">//</span> Team Members
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Member 1: havoc -->
+        <div class="team-member-card">
+          <div class="member-avatar">
+            <img 
+              src="/assets/avatars/havoc.webp"
+              alt="mockingspectre" 
+              class="avatar-image"
+            />
+          </div>
+          
+          <div class="member-info">
+            <h3 class="member-name">MockingSpectre</h3>
+            <p class="member-role">Web Exploitation / OSINT</p>
+            <p class="member-position">Founder & Team Lead</p>
+            
+            <!-- Social Links - Add/remove links as needed -->
+            <div class="social-links">
+              <!-- GitHub -->
+              <a href="https://github.com/mockingspectre" target="_blank" class="social-icon" title="GitHub">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              
+              <!-- X (Twitter) -->
+              <a href="https://twitter.com/mockingspectre" target="_blank" class="social-icon" title="X (Twitter)">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              
+              <!-- LinkedIn -->
+              <a href="https://linkedin.com/in/mockingspectre" target="_blank" class="social-icon" title="LinkedIn">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              
+              <!-- To add more: Website, Linktree, Instagram, etc. - see Havoc's profile for examples -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="team-member-card">
+          <div class="member-avatar">
+            <img 
+              src="/assets/avatars/member2.webp"
+              alt="0xc4rc3I" 
+              class="avatar-image"
+            />
+          </div>
+          
+          <div class="member-info">
+            <h3 class="member-name" style="color: #ff00ff;">0xc4rc3I</h3>
+            <p class="member-role">Reverse Engineering / Crypto</p>
+            <p class="member-position">Event-Organizer</p>
+            
+            <!-- Social Links - Add/remove links as needed -->
+            <div class="social-links">
+              <!-- GitHub -->
+              <a href="https://github.com/0xc4rc3I" target="_blank" class="social-icon" title="GitHub">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              
+              <!-- X (Twitter) -->
+              <a href="https://twitter.com/0xc4rc3I" target="_blank" class="social-icon" title="X (Twitter)">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              
+              <!-- LinkedIn -->
+              <a href="https://linkedin.com/in/0xc4rc3I" target="_blank" class="social-icon" title="LinkedIn">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              
+              <!-- To add more: Website, Linktree, Instagram, etc. - see Havoc's profile for examples -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="team-member-card">
+          <div class="member-avatar">
+            <img 
+              src="/assets/avatars/member3.webp"
+              alt="havoc" 
+              class="avatar-image"
+            />
+          </div>
+          
+          <div class="member-info">
+            <h3 class="member-name" style="color: #8a2be2;">Havoc</h3>
+            <p class="member-role">Osint /Systems/</p>
+            <p class="member-position">Community-leader</p>
+            
+            <!-- Social Links - Add/remove links as needed -->
+            <div class="social-links">
+              <!-- GitHub -->
+              <a href="https://github.com/Daniel-wambua" target="_blank" class="social-icon" title="GitHub">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              
+              <!-- X (Twitter) -->
+              <a href="https://x.com/HavocRichie?t=smiK1Is6LAWykS9FlJg4eQ&s=09" target="_blank" class="social-icon" title="X (Twitter)">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              
+              <!-- LinkedIn -->
+              <a href="https://linkedin.com/in/danielwambua" target="_blank" class="social-icon" title="LinkedIn">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              
+              <!-- Linktree -->
+              <a href="https://linktree.havocsec.me" target="_blank" class="social-icon" title="Linktree">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="m13.736 5.853 4.005-4.117 2.325 2.38-4.2 4.005h5.908v3.305h-5.937l4.229 4.108-2.325 2.334-5.74-5.769-5.741 5.769-2.325-2.325 4.229-4.108H2.226V8.121h5.909l-4.2-4.004 2.324-2.381 4.005 4.117V0h3.472v5.853zM10.229 24v-8.884h3.472V24h-3.472z"/>
+                </svg>
+              </a>
+              
+              <!-- 
+              To add more social links, copy one of the blocks above and modify:
+              1. href - your profile URL
+              2. title - platform name for tooltip
+              3. SVG path - icon for the platform (get from https://simpleicons.org)
+              
+              Example for Instagram:
+              <a href="https://instagram.com/yourusername" target="_blank" class="social-icon" title="Instagram">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="mt-16">
+        <h2 class="text-4xl font-orbitron text-cyan-400 mb-8">
+          <span class="text-magenta-400">//</span> Our Expertise
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="skill-card">
+            <h3 class="text-xl font-orbitron text-cyan-400 mb-3">Web Exploitation</h3>
+            <p class="text-gray-400 font-mono text-sm">
+              SQL Injection, XSS, CSRF, Authentication Bypass, Server-Side Vulnerabilities
+            </p>
+          </div>
+          
+          <div class="skill-card">
+            <h3 class="text-xl font-orbitron text-magenta-400 mb-3">Binary Exploitation</h3>
+            <p class="text-gray-400 font-mono text-sm">
+              Buffer Overflows, ROP, Format Strings, Heap Exploitation, Shellcoding
+            </p>
+          </div>
+          
+          <div class="skill-card">
+            <h3 class="text-xl font-orbitron text-purple-400 mb-3">Reverse Engineering</h3>
+            <p class="text-gray-400 font-mono text-sm">
+              Malware Analysis, Binary Decompilation, Obfuscation Techniques, Anti-Debug
+            </p>
+          </div>
+          
+          <div class="skill-card">
+            <h3 class="text-xl font-orbitron text-cyan-400 mb-3">Cryptography</h3>
+            <p class="text-gray-400 font-mono text-sm">
+              Classical Ciphers, RSA Attacks, Hash Collisions, Side-Channel Analysis
+            </p>
+          </div>
+          
+          <div class="skill-card">
+            <h3 class="text-xl font-orbitron text-magenta-400 mb-3">OSINT</h3>
+            <p class="text-gray-400 font-mono text-sm">
+              Open Source Intelligence, Digital Footprinting, Social Engineering, Reconnaissance
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .team-member-card {
+    @apply relative rounded-xl overflow-hidden;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(10, 10, 30, 0.9) 100%);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    padding: 2rem;
+    min-height: 380px;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .team-member-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .team-member-card:hover::before {
+    opacity: 1;
+  }
+  
+  .team-member-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+      transparent 30%, 
+      rgba(0, 255, 255, 0.1) 50%, 
+      transparent 70%);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    pointer-events: none;
+  }
+  
+  .team-member-card:hover::after {
+    left: 100%;
+  }
+  
+  .team-member-card:hover {
+    border-color: rgba(255, 0, 255, 0.5);
+    box-shadow: 
+      0 20px 40px rgba(0, 255, 255, 0.2),
+      0 0 60px rgba(255, 0, 255, 0.15),
+      inset 0 0 40px rgba(0, 255, 255, 0.05);
+  }
+  
+  .member-avatar {
+    @apply relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden;
+    border: 3px solid rgba(0, 255, 255, 0.4);
+    box-shadow: 
+      0 0 20px rgba(0, 255, 255, 0.3),
+      0 0 40px rgba(255, 0, 255, 0.2);
+    transition: all 0.3s ease;
+    transform: translateZ(50px);
+  }
+  
+  .team-member-card:hover .member-avatar {
+    border-color: rgba(255, 0, 255, 0.6);
+    transform: translateZ(80px) scale(1.05);
+    box-shadow: 
+      0 0 30px rgba(0, 255, 255, 0.5),
+      0 0 60px rgba(255, 0, 255, 0.4);
+  }
+  
+  .avatar-image {
+    @apply w-full h-full object-cover;
+    filter: brightness(1.1) contrast(1.1);
+  }
+  
+  .member-info {
+    @apply text-center flex flex-col items-center gap-2 relative;
+    transform: translateZ(30px);
+  }
+  
+  .member-name {
+    @apply text-2xl font-orbitron mb-1;
+    background: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
+    transition: all 0.3s ease;
+  }
+  
+  .team-member-card:hover .member-name {
+    filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8));
+  }
+  
+  .member-role {
+    @apply text-gray-300 font-mono text-sm mb-2;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  }
+  
+  .member-position {
+    @apply font-mono text-xs font-semibold mb-4 px-4 py-1 rounded-full;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(255, 0, 255, 0.2) 100%);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #00ffff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .team-member-card:hover .member-position {
+    border-color: rgba(255, 0, 255, 0.5);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+    color: #ff00ff;
+  }
+  
+  .social-links {
+    @apply flex gap-3 mt-2;
+  }
+  
+  .social-icon {
+    @apply p-2.5 rounded-lg transition-all duration-300;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #00ffff;
+    position: relative;
+    transform: translateZ(40px);
+  }
+  
+  .social-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .social-icon:hover {
+    border-color: rgba(255, 0, 255, 0.6);
+    color: #ff00ff;
+    box-shadow: 
+      0 0 20px rgba(255, 0, 255, 0.5),
+      inset 0 0 10px rgba(255, 0, 255, 0.2);
+    transform: translateZ(60px) scale(1.1);
+  }
+  
+  .social-icon:hover::before {
+    opacity: 1;
+  }
+  
+  .social-icon svg {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .skill-card {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg p-6;
+    @apply hover:border-magenta-400/50 transition-all duration-300;
+    backdrop-filter: blur(10px);
+  }
+  
+  .skill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+  }
+</style>
+
+<script>
+  import VanillaTilt from 'vanilla-tilt';
+  
+  // Initialize Vanilla Tilt on all team member cards
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll<HTMLElement>('.team-member-card');
+    
+    VanillaTilt.init(Array.from(cards), {
+      max: 15,              // Max tilt rotation (degrees)
+      speed: 400,           // Speed of the enter/exit transition
+      glare: true,          // Enable glare effect
+      'max-glare': 0.3,     // Max glare opacity
+      scale: 1.02,          // Scale on hover
+      perspective: 1000,    // Perspective value
+      gyroscope: false,     // Enable gyroscope if on mobile
+      reset: true,          // Reset on exit
+      easing: 'cubic-bezier(.03,.98,.52,.99)',
+    });
+  });
+</script>

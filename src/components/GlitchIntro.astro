@@ -1,0 +1,104 @@
+<!--
+┌── Message from havoc ────────────────────────────────────────────────────┐
+│                                                                                │
+│   Hello, me and my team have spent countless hours in designing this website   │
+│   Please don't copy it, make something original from scratch                   │
+│   It is not that hard really!!                                                 │
+│                                                                                │
+└────────────────────────────────────────────────────────────────────────────────┘
+-->
+---
+---
+
+<div id="glitch-intro" class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
+  <div class="text-center">
+    <h1 class="text-6xl md:text-8xl font-orbitron glitch-title mb-8">
+      NEXOLABS
+    </h1>
+    <div class="typing-text font-mono text-cyan-400 text-xl md:text-2xl">
+      <span id="typing"></span>
+      <span class="cursor">_</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .glitch-title {
+    @apply text-cyan-400;
+    text-shadow: 
+      0 0 10px #00ffff,
+      0 0 20px #00ffff,
+      0 0 40px #00ffff,
+      0 0 80px #00ffff;
+    animation: glitch-anim 2s infinite;
+  }
+  
+  @keyframes glitch-anim {
+    0%, 100% {
+      text-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 40px #00ffff;
+      transform: translate(0);
+    }
+    20% {
+      text-shadow: 
+        -2px 0 #ff00ff,
+        2px 0 #00ffff,
+        0 0 20px #00ffff;
+      transform: translate(-2px, 2px);
+    }
+    40% {
+      text-shadow: 
+        2px 0 #ff00ff,
+        -2px 0 #00ffff,
+        0 0 20px #ff00ff;
+      transform: translate(2px, -2px);
+    }
+    60% {
+      text-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 40px #00ffff;
+      transform: translate(0);
+    }
+  }
+  
+  .cursor {
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+</style>
+
+<script>
+  const text = "Decrypting Identity... Access Granted.";
+  const typingElement = document.getElementById("typing");
+  const introElement = document.getElementById("glitch-intro");
+  let index = 0;
+  
+  function typeText() {
+    if (index < text.length && typingElement) {
+      typingElement.textContent += text.charAt(index);
+      index++;
+      setTimeout(typeText, 50);
+    } else {
+      setTimeout(() => {
+        if (introElement) {
+          introElement.style.opacity = "0";
+          introElement.style.transition = "opacity 0.5s";
+          setTimeout(() => {
+            introElement.remove();
+          }, 500);
+        }
+      }, 1000);
+    }
+  }
+  
+  window.addEventListener("load", () => {
+    setTimeout(typeText, 500);
+  });
+</script>

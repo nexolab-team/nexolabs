@@ -1,0 +1,313 @@
+<!--
+┌── Message from havoc ────────────────────────────────────────────────────┐
+│                                                                                │
+│   Hello, me and my team have spent countless hours in designing this website   │
+│   Please don't copy it, make something original from scratch                   │
+│   It is not that hard really!!                                                 │
+│                                                                                │
+└────────────────────────────────────────────────────────────────────────────────┘
+-->
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 - Page Not Found | NexoLabs">
+  <section class="min-h-screen flex items-center justify-center px-6 py-20">
+    <div class="container mx-auto max-w-4xl">
+      <!-- Glitch Error Code -->
+      <div class="text-center mb-12">
+        <h1 class="error-code" data-text="404">404</h1>
+        <div class="error-bar"></div>
+      </div>
+
+      <!-- Error Message -->
+      <div class="glass-card text-center mb-12">
+        <div class="mb-6">
+          <svg class="w-24 h-24 mx-auto text-cyan-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+        </div>
+        
+        <h2 class="text-4xl font-orbitron text-magenta-400 mb-4">
+          <span class="text-cyan-400">//</span> Access Denied
+        </h2>
+        
+        <p class="text-xl text-gray-300 font-mono mb-2">
+          The page you're looking for doesn't exist in our database.
+        </p>
+        
+        <p class="text-sm text-gray-500 font-mono">
+          Error: <span class="text-red-400">ENOENT</span> - Resource not found in the system
+        </p>
+      </div>
+
+      <!-- Terminal-style suggestions -->
+      <div class="terminal-box mb-8">
+        <div class="terminal-header">
+          <div class="flex gap-2">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+          </div>
+          <span class="text-xs text-gray-400 font-mono">nexolabs@terminal:~</span>
+        </div>
+        
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="text-cyan-400">$</span> 
+            <span class="text-gray-300">cat suggestions.txt</span>
+          </div>
+          <div class="terminal-output">
+            <p class="text-magenta-400"># Possible solutions:</p>
+            <p class="text-gray-400">1. Check the URL for typos</p>
+            <p class="text-gray-400">2. Navigate from the menu</p>
+            <p class="text-gray-400">3. Return to home base</p>
+          </div>
+          <div class="terminal-line">
+            <span class="text-cyan-400">$</span>
+            <span class="blinking-cursor">_</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <a href="/" class="quick-link-card">
+          <svg class="w-8 h-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          <h3 class="font-orbitron text-lg mb-1">Home</h3>
+          <p class="text-xs text-gray-500">Return to base</p>
+        </a>
+
+        <a href="/writeups" class="quick-link-card">
+          <svg class="w-8 h-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <h3 class="font-orbitron text-lg mb-1">Writeups</h3>
+          <p class="text-xs text-gray-500">Browse exploits</p>
+        </a>
+
+        <a href="/about" class="quick-link-card">
+          <svg class="w-8 h-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          <h3 class="font-orbitron text-lg mb-1">About</h3>
+          <p class="text-xs text-gray-500">Meet the team</p>
+        </a>
+
+        <a href="/achievements" class="quick-link-card">
+          <svg class="w-8 h-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+          </svg>
+          <h3 class="font-orbitron text-lg mb-1">Achievements</h3>
+          <p class="text-xs text-gray-500">View stats</p>
+        </a>
+      </div>
+
+      <!-- Back Button -->
+      <div class="text-center">
+        <button onclick="history.back()" class="back-button">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Go Back
+        </button>
+        
+        <p class="mt-4 text-sm text-gray-500 font-mono">
+          Or press <kbd class="kbd">Alt</kbd> + <kbd class="kbd">←</kbd>
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .error-code {
+    font-size: 12rem;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    background: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    animation: glitch 2s infinite;
+    text-shadow: 
+      0 0 20px rgba(0, 255, 255, 0.5),
+      0 0 40px rgba(255, 0, 255, 0.3);
+  }
+
+  .error-code::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    text-shadow: -2px 0 #00ffff;
+    top: 0;
+    color: #00ffff;
+    background: transparent;
+    overflow: hidden;
+    animation: glitch-1 2.5s infinite;
+  }
+
+  .error-code::after {
+    content: attr(data-text);
+    position: absolute;
+    left: -2px;
+    text-shadow: 2px 0 #ff00ff;
+    top: 0;
+    color: #ff00ff;
+    background: transparent;
+    overflow: hidden;
+    animation: glitch-2 3s infinite;
+  }
+
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+  }
+
+  @keyframes glitch-1 {
+    0% { clip-path: inset(40% 0 61% 0); }
+    20% { clip-path: inset(92% 0 1% 0); }
+    40% { clip-path: inset(43% 0 1% 0); }
+    60% { clip-path: inset(25% 0 58% 0); }
+    80% { clip-path: inset(54% 0 7% 0); }
+    100% { clip-path: inset(58% 0 43% 0); }
+  }
+
+  @keyframes glitch-2 {
+    0% { clip-path: inset(25% 0 58% 0); }
+    20% { clip-path: inset(54% 0 7% 0); }
+    40% { clip-path: inset(58% 0 43% 0); }
+    60% { clip-path: inset(40% 0 61% 0); }
+    80% { clip-path: inset(92% 0 1% 0); }
+    100% { clip-path: inset(43% 0 1% 0); }
+  }
+
+  .error-bar {
+    width: 200px;
+    height: 4px;
+    margin: 2rem auto;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      #00ffff 50%, 
+      transparent 100%);
+    animation: scan 2s infinite;
+  }
+
+  @keyframes scan {
+    0%, 100% { transform: translateX(-100px); opacity: 0; }
+    50% { transform: translateX(100px); opacity: 1; }
+  }
+
+  .glass-card {
+    @apply bg-black/50 border border-cyan-500/30 rounded-xl p-8 backdrop-blur-md;
+    box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+  }
+
+  .terminal-box {
+    @apply bg-black/80 border border-cyan-500/30 rounded-lg overflow-hidden backdrop-blur-md;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.15);
+  }
+
+  .terminal-header {
+    @apply bg-gray-900/90 px-4 py-3 flex items-center justify-between border-b border-cyan-500/20;
+  }
+
+  .terminal-body {
+    @apply p-4 font-mono text-sm;
+  }
+
+  .terminal-line {
+    @apply mb-2;
+  }
+
+  .terminal-output {
+    @apply ml-4 mb-4 text-sm;
+  }
+
+  .terminal-output p {
+    @apply mb-1;
+  }
+
+  .blinking-cursor {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .quick-link-card {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg p-6 text-center;
+    @apply hover:border-magenta-400/50 transition-all duration-300;
+    @apply flex flex-col items-center justify-center;
+    backdrop-filter: blur(10px);
+  }
+
+  .quick-link-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+  }
+
+  .quick-link-card svg {
+    @apply text-cyan-400;
+    transition: all 0.3s;
+  }
+
+  .quick-link-card:hover svg {
+    @apply text-magenta-400;
+    transform: scale(1.1);
+  }
+
+  .quick-link-card h3 {
+    @apply text-cyan-400;
+    transition: all 0.3s;
+  }
+
+  .quick-link-card:hover h3 {
+    @apply text-magenta-400;
+  }
+
+  .back-button {
+    @apply px-8 py-3 rounded-lg font-orbitron font-semibold;
+    @apply flex items-center justify-center mx-auto;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    color: #00ffff;
+    transition: all 0.3s ease;
+  }
+
+  .back-button:hover {
+    border-color: rgba(255, 0, 255, 0.6);
+    color: #ff00ff;
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+    transform: translateX(-5px);
+  }
+
+  .kbd {
+    @apply inline-block px-2 py-1 text-xs font-mono rounded;
+    @apply bg-gray-800 border border-gray-600 text-gray-300;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .error-code {
+      font-size: 8rem;
+    }
+  }
+</style>
+
+<script>
+  // Keyboard shortcut: Alt + Left Arrow to go back
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey && e.key === 'ArrowLeft') {
+      history.back();
+    }
+  });
+</script>

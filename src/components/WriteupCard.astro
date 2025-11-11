@@ -1,0 +1,150 @@
+<!--
+┌── Message from havoc ────────────────────────────────────────────────────┐
+│                                                                                │
+│   Hello, me and my team have spent countless hours in designing this website   │
+│   Please don't copy it, make something original from scratch                   │
+│   It is not that hard really!!                                                 │
+│                                                                                │
+└────────────────────────────────────────────────────────────────────────────────┘
+-->
+---
+import { getEntry } from 'astro:content';
+
+interface Props {
+  title: string;
+  category: string;
+  difficulty: string;
+  author: string;
+  date: string;
+  slug: string;
+  description?: string;
+  tags?: string[];
+}
+
+const { title, category, difficulty, author, date, slug, description, tags } = Astro.props;
+
+const difficultyColor = {
+  Easy: 'text-green-400',
+  Medium: 'text-yellow-400',
+  Hard: 'text-orange-400',
+  Insane: 'text-red-400',
+};
+
+// Calculate reading time
+const entry = await getEntry('writeups', slug);
+const content = entry?.body || '';
+const wordsPerMinute = 200;
+const wordCount = content.split(/\s+/).length;
+const readingTime = Math.ceil(wordCount / wordsPerMinute);
+---
+
+<article class="writeup-card" data-category={category} data-difficulty={difficulty}>
+  <div class="p-6">
+    <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider category-badge">{category}</span>
+        <span class={`text-xs font-mono uppercase difficulty-badge ${difficultyColor[difficulty]}`}>
+          {difficulty}
+        </span>
+      </div>
+      <span class="text-xs font-mono text-gray-500 flex items-center gap-1">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        {readingTime} min read
+      </span>
+    </div>
+    
+    <h3 class="text-xl font-orbitron text-white mb-3 hover:text-cyan-400 transition-colors">
+      <a href={`/writeups/${slug}`}>{title}</a>
+    </h3>
+    
+    {description && (
+      <p class="text-gray-400 text-sm font-mono mb-4 line-clamp-2">
+        {description}
+      </p>
+    )}
+    
+    {tags && tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-4">
+        {tags.slice(0, 3).map(tag => (
+          <span class="tag">#{tag}</span>
+        ))}
+      </div>
+    )}
+    
+    <div class="flex items-center justify-between text-xs font-mono text-gray-500">
+      <a href={`/about#${author.toLowerCase()}`} class="author-link">
+        by {author}
+      </a>
+      <span>{date}</span>
+    </div>
+  </div>
+  
+  <div class="border-t border-cyan-500/30 p-4 flex items-center justify-between">
+    <a 
+      href={`/writeups/${slug}`}
+      class="text-cyan-400 hover:text-magenta-400 font-mono text-sm uppercase tracking-wider transition-colors inline-flex items-center gap-2"
+    >
+      Read Writeup
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </a>
+  </div>
+</article>
+
+<style>
+  .writeup-card {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg overflow-hidden;
+    @apply hover:border-magenta-400/50 transition-all duration-300;
+    @apply hover:shadow-lg hover:shadow-cyan-500/20;
+    backdrop-filter: blur(10px);
+  }
+  
+  .writeup-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .category-badge {
+    @apply px-2 py-1 rounded bg-cyan-500/10 border border-cyan-500/30;
+  }
+  
+  .difficulty-badge {
+    @apply px-2 py-1 rounded border;
+  }
+  
+  .difficulty-badge.text-green-400 {
+    @apply bg-green-500/10 border-green-500/30;
+  }
+  
+  .difficulty-badge.text-yellow-400 {
+    @apply bg-yellow-500/10 border-yellow-500/30;
+  }
+  
+  .difficulty-badge.text-orange-400 {
+    @apply bg-orange-500/10 border-orange-500/30;
+  }
+  
+  .difficulty-badge.text-red-400 {
+    @apply bg-red-500/10 border-red-500/30;
+  }
+  
+  .tag {
+    @apply text-xs font-mono text-magenta-400 px-2 py-1 rounded;
+    @apply bg-magenta-500/10 border border-magenta-500/30;
+  }
+  
+  .author-link {
+    @apply hover:text-cyan-400 transition-colors;
+  }
+</style>

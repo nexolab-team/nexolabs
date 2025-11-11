@@ -1,0 +1,520 @@
+<!--
+┌── Message from havoc ────────────────────────────────────────────────────┐
+│                                                                                │
+│   Hello, me and my team have spent countless hours in designing this website   │
+│   Please don't copy it, make something original from scratch                   │
+│   It is not that hard really!!                                                 │
+│                                                                                │
+└────────────────────────────────────────────────────────────────────────────────┘
+-->
+---
+import Layout from '../layouts/Layout.astro';
+import WriteupCard from '../components/WriteupCard.astro';
+import { getCollection } from 'astro:content';
+
+const allWriteups = await getCollection('writeups');
+const sortedWriteups = allWriteups.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+const categories = [...new Set(allWriteups.map(w => w.data.category))];
+const difficulties = ['Easy', 'Medium', 'Hard', 'Insane'];
+const allTags = [...new Set(allWriteups.flatMap(w => w.data.tags || []))];
+---
+
+<Layout title="Writeups - NexoLabs">
+  <section class="py-20 px-6">
+    <div class="container mx-auto">
+      <h1 class="text-5xl md:text-7xl font-orbitron text-cyan-400 mb-4">
+        <span class="text-magenta-400">//</span> Writeups
+      </h1>
+      
+      <p class="text-gray-400 font-mono text-lg mb-8 max-w-3xl">
+        Technical breakdowns of CTF challenges, vulnerability analyses, and exploitation techniques. 
+        Each writeup details our approach, tools used, and lessons learned.
+      </p>
+      
+      <!-- Stats Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div class="stat-box">
+          <div class="stat-value">{allWriteups.length}</div>
+          <div class="stat-label">Total Writeups</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">{categories.length}</div>
+          <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value" id="filteredCount">{allWriteups.length}</div>
+          <div class="stat-label">Showing</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">{allTags.length}</div>
+          <div class="stat-label">Tags</div>
+        </div>
+      </div>
+
+      <!-- Search and Controls -->
+      <div class="controls-section mb-8">
+        <!-- Search Bar -->
+        <div class="search-container">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search writeups by title, description, or tags..." 
+            class="search-input"
+          />
+          <button id="clearSearch" class="clear-search hidden">×</button>
+        </div>
+        
+        <!-- View Toggle and Sort -->
+        <div class="flex flex-wrap gap-4 items-center">
+          <div class="view-toggle">
+            <button class="view-btn active" data-view="grid" title="Grid view">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </button>
+            <button class="view-btn" data-view="list" title="List view">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          
+          <select id="sortSelect" class="sort-select">
+            <option value="date-desc">Newest First</option>
+            <option value="date-asc">Oldest First</option>
+            <option value="title-asc">Title A-Z</option>
+            <option value="title-desc">Title Z-A</option>
+            <option value="difficulty-asc">Difficulty ↑</option>
+            <option value="difficulty-desc">Difficulty ↓</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-section mb-8">
+        <div class="mb-4">
+          <h3 class="filter-label">Category</h3>
+          <div class="flex flex-wrap gap-3">
+            <button class="filter-btn active" data-filter-type="category" data-value="all">
+              All ({allWriteups.length})
+            </button>
+            {categories.map(category => {
+              const count = allWriteups.filter(w => w.data.category === category).length;
+              return (
+                <button class="filter-btn" data-filter-type="category" data-value={category}>
+                  {category} ({count})
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="filter-label">Difficulty</h3>
+          <div class="flex flex-wrap gap-3">
+            <button class="filter-btn active" data-filter-type="difficulty" data-value="all">
+              All
+            </button>
+            {difficulties.map(difficulty => {
+              const count = allWriteups.filter(w => w.data.difficulty === difficulty).length;
+              return (
+                <button class="filter-btn" data-filter-type="difficulty" data-value={difficulty}>
+                  {difficulty} ({count})
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <!-- Writeups Grid -->
+      <div id="writeups-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300">
+        {sortedWriteups.map((writeup) => (
+          <WriteupCard
+            title={writeup.data.title}
+            category={writeup.data.category}
+            difficulty={writeup.data.difficulty}
+            author={writeup.data.author}
+            date={writeup.data.date}
+            slug={writeup.slug}
+            description={writeup.data.description}
+            tags={writeup.data.tags}
+          />
+        ))}
+      </div>
+      
+      <!-- No Results Message -->
+      <div id="noResults" class="no-results hidden">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <h3>No writeups found</h3>
+        <p>Try adjusting your filters or search query</p>
+      </div>
+      
+      <!-- Pagination -->
+      <div id="pagination" class="pagination mt-12"></div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .stat-box {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg p-4 text-center;
+    backdrop-filter: blur(10px);
+  }
+  
+  .stat-value {
+    @apply text-3xl font-orbitron text-cyan-400 mb-1;
+  }
+  
+  .stat-label {
+    @apply text-xs font-mono text-gray-500 uppercase;
+  }
+  
+  .controls-section {
+    @apply flex flex-col md:flex-row gap-4 items-stretch md:items-center;
+  }
+  
+  .search-container {
+    @apply relative flex-1;
+  }
+  
+  .search-icon {
+    @apply absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400;
+    pointer-events: none;
+  }
+  
+  .search-input {
+    @apply w-full pl-12 pr-12 py-3 bg-black/50 border border-cyan-500/30 rounded-lg;
+    @apply text-gray-300 font-mono text-sm;
+    @apply focus:outline-none focus:border-cyan-400 transition-all;
+    backdrop-filter: blur(10px);
+  }
+  
+  .search-input::placeholder {
+    @apply text-gray-600;
+  }
+  
+  .clear-search {
+    @apply absolute right-4 top-1/2 -translate-y-1/2;
+    @apply text-magenta-400 text-2xl font-bold;
+    @apply hover:text-red-400 transition-colors;
+  }
+  
+  .view-toggle {
+    @apply flex gap-2 p-1 bg-black/50 border border-cyan-500/30 rounded-lg;
+  }
+  
+  .view-btn {
+    @apply p-2 rounded text-cyan-400;
+    @apply hover:bg-cyan-500/10 transition-all;
+  }
+  
+  .view-btn.active {
+    @apply bg-cyan-500/20 text-cyan-400;
+  }
+  
+  .sort-select {
+    @apply px-4 py-3 bg-black/50 border border-cyan-500/30 rounded-lg;
+    @apply text-cyan-400 font-mono text-sm;
+    @apply focus:outline-none focus:border-cyan-400 transition-all;
+    backdrop-filter: blur(10px);
+  }
+  
+  .filters-section {
+    @apply bg-black/30 border border-cyan-500/20 rounded-lg p-6;
+    backdrop-filter: blur(10px);
+  }
+  
+  .filter-label {
+    @apply text-sm font-mono text-gray-400 uppercase tracking-wider mb-3;
+  }
+  
+  .filter-btn {
+    @apply px-4 py-2 bg-black/50 border border-cyan-500/30 text-cyan-400;
+    @apply font-mono tracking-wider rounded-lg text-xs;
+    @apply hover:border-magenta-400 hover:text-magenta-400 transition-all duration-300;
+  }
+  
+  .filter-btn.active {
+    @apply bg-cyan-500/20 border-cyan-400 text-cyan-400;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  }
+  
+  #writeups-container.list-view {
+    @apply grid-cols-1;
+  }
+  
+  #writeups-container.list-view .writeup-card {
+    @apply flex flex-row;
+  }
+  
+  .no-results {
+    @apply text-center py-20;
+  }
+  
+  .no-results svg {
+    @apply mx-auto mb-4 text-cyan-400 opacity-50;
+  }
+  
+  .no-results h3 {
+    @apply text-2xl font-orbitron text-cyan-400 mb-2;
+  }
+  
+  .no-results p {
+    @apply text-gray-500 font-mono;
+  }
+  
+  .pagination {
+    @apply flex justify-center gap-2 flex-wrap;
+  }
+  
+  .page-btn {
+    @apply px-4 py-2 bg-black/50 border border-cyan-500/30 text-cyan-400;
+    @apply font-mono rounded-lg text-sm;
+    @apply hover:border-magenta-400 hover:text-magenta-400 transition-all;
+  }
+  
+  .page-btn.active {
+    @apply bg-cyan-500/20 border-cyan-400;
+  }
+  
+  .page-btn:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+</style>
+
+<script>
+  // Enhanced Writeups Filtering System
+  const writeupCards = document.querySelectorAll('.writeup-card');
+  const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+  const clearSearch = document.getElementById('clearSearch');
+  const sortSelect = document.getElementById('sortSelect') as HTMLSelectElement;
+  const viewBtns = document.querySelectorAll('.view-btn');
+  const container = document.getElementById('writeups-container');
+  const noResults = document.getElementById('noResults');
+  const filteredCount = document.getElementById('filteredCount');
+  
+  let currentFilters = {
+    category: 'all',
+    difficulty: 'all',
+    search: '',
+    sort: 'date-desc',
+    view: 'grid'
+  };
+  
+  const ITEMS_PER_PAGE = 9;
+  let currentPage = 1;
+  
+  // Get writeup data
+  const writeups = Array.from(writeupCards).map(card => ({
+    element: card as HTMLElement,
+    title: card.querySelector('h3')?.textContent?.toLowerCase() || '',
+    description: card.querySelector('p')?.textContent?.toLowerCase() || '',
+    category: card.getAttribute('data-category') || '',
+    difficulty: card.getAttribute('data-difficulty') || '',
+    tags: Array.from(card.querySelectorAll('.tag')).map(t => t.textContent?.toLowerCase() || '').join(' '),
+    date: card.querySelector('.text-xs.font-mono.text-gray-500 span:last-child')?.textContent || '',
+  }));
+  
+  // Filter buttons
+  document.querySelectorAll('[data-filter-type]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const filterType = this.getAttribute('data-filter-type');
+      const value = this.getAttribute('data-value');
+      
+      // Update active state for this filter type
+      document.querySelectorAll(`[data-filter-type="${filterType}"]`).forEach(b => 
+        b.classList.remove('active')
+      );
+      this.classList.add('active');
+      
+      currentFilters[filterType] = value;
+      currentPage = 1;
+      applyFilters();
+    });
+  });
+  
+  // Search
+  searchInput?.addEventListener('input', function() {
+    currentFilters.search = this.value.toLowerCase();
+    clearSearch?.classList.toggle('hidden', !this.value);
+    currentPage = 1;
+    applyFilters();
+  });
+  
+  clearSearch?.addEventListener('click', () => {
+    searchInput.value = '';
+    currentFilters.search = '';
+    clearSearch.classList.add('hidden');
+    currentPage = 1;
+    applyFilters();
+  });
+  
+  // Sort
+  sortSelect?.addEventListener('change', function() {
+    currentFilters.sort = this.value;
+    applyFilters();
+  });
+  
+  // View toggle
+  viewBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      viewBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentFilters.view = this.getAttribute('data-view') || 'grid';
+      
+      if (currentFilters.view === 'list') {
+        container?.classList.add('list-view');
+      } else {
+        container?.classList.remove('list-view');
+      }
+    });
+  });
+  
+  // Apply all filters
+  function applyFilters() {
+    let filtered = writeups.filter(w => {
+      // Category filter
+      if (currentFilters.category !== 'all' && w.category !== currentFilters.category) {
+        return false;
+      }
+      
+      // Difficulty filter
+      if (currentFilters.difficulty !== 'all' && w.difficulty !== currentFilters.difficulty) {
+        return false;
+      }
+      
+      // Search filter
+      if (currentFilters.search) {
+        const searchLower = currentFilters.search;
+        if (!w.title.includes(searchLower) && 
+            !w.description.includes(searchLower) && 
+            !w.tags.includes(searchLower)) {
+          return false;
+        }
+      }
+      
+      return true;
+    });
+    
+    // Sort
+    filtered.sort((a, b) => {
+      switch (currentFilters.sort) {
+        case 'date-desc':
+          return b.date.localeCompare(a.date);
+        case 'date-asc':
+          return a.date.localeCompare(b.date);
+        case 'title-asc':
+          return a.title.localeCompare(b.title);
+        case 'title-desc':
+          return b.title.localeCompare(a.title);
+        case 'difficulty-asc':
+          const diffOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3, 'Insane': 4 };
+          return diffOrder[a.difficulty] - diffOrder[b.difficulty];
+        case 'difficulty-desc':
+          const diffOrderDesc = { 'Easy': 1, 'Medium': 2, 'Hard': 3, 'Insane': 4 };
+          return diffOrderDesc[b.difficulty] - diffOrderDesc[a.difficulty];
+        default:
+          return 0;
+      }
+    });
+    
+    // Update count
+    if (filteredCount) {
+      filteredCount.textContent = filtered.length.toString();
+    }
+    
+    // Show/hide no results
+    noResults?.classList.toggle('hidden', filtered.length > 0);
+    
+    // Pagination
+    const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    const paginated = filtered.slice(start, end);
+    
+    // Display
+    writeups.forEach(w => w.element.style.display = 'none');
+    paginated.forEach(w => {
+      w.element.style.display = 'block';
+      w.element.style.animation = 'fadeIn 0.3s ease-in';
+    });
+    
+    // Render pagination
+    renderPagination(totalPages, filtered.length);
+  }
+  
+  // Pagination
+  function renderPagination(totalPages: number, totalItems: number) {
+    const pagination = document.getElementById('pagination');
+    if (!pagination || totalPages <= 1) {
+      pagination && (pagination.innerHTML = '');
+      return;
+    }
+    
+    let html = '';
+    
+    // Previous
+    html += `<button class="page-btn" data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''}>←</button>`;
+    
+    // Pages
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+        html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+      } else if (i === currentPage - 2 || i === currentPage + 2) {
+        html += `<span class="px-2 text-gray-500">...</span>`;
+      }
+    }
+    
+    // Next
+    html += `<button class="page-btn" data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''}>→</button>`;
+    
+    pagination.innerHTML = html;
+    
+    // Add event listeners
+    pagination.querySelectorAll('[data-page]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const page = parseInt(this.getAttribute('data-page') || '1');
+        if (page >= 1 && page <= totalPages) {
+          currentPage = page;
+          applyFilters();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+  
+  // Initial render
+  applyFilters();
+</script>
+
+<style is:global>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

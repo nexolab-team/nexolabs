@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nexolabs.github.io/sitemap.xml
+
+# Crawl-delay: 10
+# Disallow: /admin/

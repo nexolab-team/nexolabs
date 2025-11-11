@@ -1,0 +1,455 @@
+<!--
+┌── Message from havoc ────────────────────────────────────────────────────┐
+│                                                                                │
+│   Hello, me and my team have spent countless hours in designing this website   │
+│   Please don't copy it, make something original from scratch                   │
+│   It is not that hard really!!                                                 │
+│                                                                                │
+└────────────────────────────────────────────────────────────────────────────────┘
+-->
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { generateAchievements, getAllStats } from '../utils/achievements.js';
+import { hasAnyPlatformConnected } from '../config/team.js';
+
+// Auto-update stats from writeups
+const allWriteups = await getCollection('writeups');
+const writeupCount = allWriteups.length;
+const latestDate = allWriteups.length > 0 
+  ? new Date(Math.max(...allWriteups.map(w => new Date(w.data.date).getTime())))
+      .toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+  : 'November 2025';
+
+// Fetch real achievements from connected platforms
+const dynamicAchievements = await generateAchievements();
+const stats = await getAllStats();
+const hasPlatforms = hasAnyPlatformConnected();
+---
+
+<Layout title="Achievements - NexoLabs">
+  <section class="py-20 px-6">
+    <div class="container mx-auto max-w-6xl">
+      <h1 class="text-5xl md:text-7xl font-orbitron text-cyan-400 mb-8">
+        <span class="text-magenta-400">//</span> Achievements
+      </h1>
+      
+      <p class="text-gray-400 font-mono text-lg mb-16 max-w-3xl">
+        Our journey in competitive cybersecurity, certifications earned, and milestones reached.
+      </p>
+
+      <!-- CTF Rankings & Stats (Auto-updated) -->
+      <div class="mb-20">
+        <h2 class="text-3xl font-orbitron text-magenta-400 mb-8">
+          <span class="text-cyan-400">//</span> CTF Rankings & Stats
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="stat-card">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-value">Top 100</div>
+            <div class="stat-label">CTFTime Global Ranking</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-value">50+</div>
+            <div class="stat-label">Challenges Solved</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">📝</div>
+            <div class="stat-value">{writeupCount}+</div>
+            <div class="stat-label">Technical Writeups</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-value">12</div>
+            <div class="stat-label">CTFs Competed</div>
+          </div>
+        </div>
+        
+        <p class="text-gray-500 font-mono text-sm mt-4 text-center">
+          Last updated: {latestDate}
+        </p>
+      </div>
+
+      <!-- Competition Wins -->
+      <div class="mb-20">
+        <h2 class="text-3xl font-orbitron text-magenta-400 mb-8">
+          <span class="text-cyan-400">//</span> Competition Wins & Top Placements
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="achievement-item">
+            <div class="achievement-rank first">1st</div>
+            <div class="achievement-details">
+              <h3 class="achievement-title">Safaricom CTF 2025</h3>
+              <p class="achievement-date">August 2025</p>
+              <p class="achievement-desc">Dominated the scoreboard with perfect position and solve rate</p>
+            </div>
+          </div>
+          
+          <div class="achievement-item">
+            <div class="achievement-rank second">2nd</div>
+            <div class="achievement-details">
+              <h3 class="achievement-title">CyberApocalypse CTF 2025</h3>
+              <p class="achievement-date">September 2025</p>
+              <p class="achievement-desc">Strong performance across all categories</p>
+            </div>
+          </div>
+          
+          <div class="achievement-item">
+            <div class="achievement-rank third">3rd</div>
+            <div class="achievement-details">
+              <h3 class="achievement-title">PicoCTF 2025</h3>
+              <p class="achievement-date">August 2025</p>
+              <p class="achievement-desc">Top placement in international competition</p>
+            </div>
+          </div>
+          
+          <div class="achievement-item">
+            <div class="achievement-rank top10">Top 10</div>
+            <div class="achievement-details">
+              <h3 class="achievement-title">DEF CON CTF Qualifiers 2025</h3>
+              <p class="achievement-date">May 2025</p>
+              <p class="achievement-desc">Qualified for semi-finals round</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications (Real cert images support) -->
+      <div class="mb-20">
+        <h2 class="text-3xl font-orbitron text-magenta-400 mb-8">
+          <span class="text-cyan-400">//</span> Certifications
+        </h2>
+        
+        <p class="text-gray-400 font-mono text-sm mb-6">
+          Upload your certification images to <code class="text-cyan-400">/public/assets/certs/</code> in any format (JPG, PNG, WebP, GIF) and they'll display here.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Real Certification Images - Supports .jpg, .jpeg, .png, .webp, .gif -->
+          <div class="cert-card-img" data-cert="/assets/certs/cert1.jpg">
+            <img src="/assets/certs/cert1.jpg" alt="CTF Achievement Certificate" class="cert-image" loading="lazy" />
+            <div class="cert-info">
+              <h3 class="cert-name">CTF Achievement</h3>
+              <p class="cert-holder">NexoLabs Team</p>
+            </div>
+          </div>
+          
+          <div class="cert-card-img" data-cert="/assets/certs/cert2.webp">
+            <img src="/assets/certs/cert2.webp" alt="Security Training Certificate" class="cert-image" loading="lazy" />
+            <div class="cert-info">
+              <h3 class="cert-name">Security Training</h3>
+              <p class="cert-holder">NexoLabs Team</p>
+            </div>
+          </div>
+          
+          <div class="cert-card-img" data-cert="/assets/certs/cert3.webp">
+            <img src="/assets/certs/cert3.webp" alt="Penetration Testing Certificate" class="cert-image" loading="lazy" />
+            <div class="cert-info">
+              <h3 class="cert-name">Penetration Testing</h3>
+              <p class="cert-holder">NexoLabs Team</p>
+            </div>
+          </div>
+          
+          <div class="cert-card-img" data-cert="/assets/certs/cert4.webp">
+            <img src="/assets/certs/cert4.webp" alt="Ethical Hacking Certificate" class="cert-image" loading="lazy" />
+            <div class="cert-info">
+              <h3 class="cert-name">Ethical Hacking</h3>
+              <p class="cert-holder">NexoLabs Team</p>
+            </div>
+          </div>
+          
+          <div class="cert-card-img" data-cert="/assets/certs/cert5.webp">
+            <img src="/assets/certs/cert5.webp" alt="Advanced Security Certificate" class="cert-image" loading="lazy" />
+            <div class="cert-info">
+              <h3 class="cert-name">Advanced Security</h3>
+              <p class="cert-holder">NexoLabs Team</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notable Achievements - Dynamic from GitHub/Socials -->
+      <div>
+        <h2 class="text-3xl font-orbitron text-magenta-400 mb-8">
+          <span class="text-cyan-400">//</span> Notable Achievements
+        </h2>
+        
+        {!hasPlatforms ? (
+          <!-- No platforms connected - show setup message -->
+          <div class="no-data-card">
+            <div class="no-data-icon">🔌</div>
+            <h3 class="no-data-title">No Platforms Connected</h3>
+            <p class="no-data-desc">
+              Connect your team's GitHub, CTFTime, or social accounts to automatically display achievements here.
+            </p>
+            <p class="no-data-instructions">
+              Edit <code class="text-cyan-400">src/config/team.js</code> to configure your platforms:
+            </p>
+            <ul class="no-data-list">
+              <li>✅ Set <code>enabled: true</code> for each platform</li>
+              <li>✅ Add your organization/team IDs</li>
+              <li>✅ Rebuild the site to see live data</li>
+            </ul>
+          </div>
+        ) : (
+          <!-- Dynamic achievements from connected platforms -->
+          <div class="space-y-4">
+            {dynamicAchievements.length === 0 ? (
+              <div class="achievement-badge">
+                <div class="badge-icon">⏳</div>
+                <div>
+                  <h3 class="badge-title">Loading Achievements...</h3>
+                  <p class="badge-desc">Fetching data from connected platforms. This may take a moment.</p>
+                </div>
+              </div>
+            ) : (
+              dynamicAchievements.map(achievement => (
+                <div class="achievement-badge">
+                  <div class="badge-icon">{achievement.icon}</div>
+                  <div>
+                    <h3 class="badge-title">{achievement.title}</h3>
+                    <p class="badge-desc">{achievement.description}</p>
+                  </div>
+                </div>
+              ))
+            )}
+            
+            <!-- Always show writeups achievement -->
+            {writeupCount > 0 && (
+              <div class="achievement-badge">
+                <div class="badge-icon">📚</div>
+                <div>
+                  <h3 class="badge-title">Community Educator</h3>
+                  <p class="badge-desc">Published {writeupCount}+ detailed technical writeups viewed by thousands of security enthusiasts</p>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Colorized emojis */
+  .stat-icon, .badge-icon {
+    @apply text-4xl mb-3;
+    filter: brightness(1.2) contrast(1.1) saturate(1.3);
+  }
+  
+  .stat-card {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg p-6 text-center;
+    @apply hover:border-magenta-400/50 transition-all duration-300;
+    backdrop-filter: blur(10px);
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+  }
+  
+  .stat-card:hover .stat-icon {
+    animation: iconBounce 0.6s ease-in-out;
+  }
+  
+  @keyframes iconBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    25% { transform: translateY(-8px) scale(1.1); }
+    50% { transform: translateY(-4px) scale(1.05); }
+    75% { transform: translateY(-6px) scale(1.08); }
+  }
+  
+  .stat-value {
+    @apply text-3xl font-orbitron text-cyan-400 mb-2;
+  }
+  
+  .stat-label {
+    @apply text-gray-400 font-mono text-sm;
+  }
+  
+  .achievement-item {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg p-6;
+    @apply hover:border-magenta-400/50 transition-all duration-300;
+    backdrop-filter: blur(10px);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .achievement-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.15);
+  }
+  
+  .achievement-rank {
+    @apply font-orbitron text-2xl font-bold px-4 py-2 rounded;
+    min-width: 80px;
+    text-align: center;
+  }
+  
+  .achievement-rank.first {
+    @apply bg-yellow-500/20 text-yellow-400 border-2 border-yellow-400/50;
+  }
+  
+  .achievement-rank.second {
+    @apply bg-gray-300/20 text-gray-300 border-2 border-gray-300/50;
+  }
+  
+  .achievement-rank.third {
+    @apply bg-orange-500/20 text-orange-400 border-2 border-orange-400/50;
+  }
+  
+  .achievement-rank.top10 {
+    @apply bg-cyan-500/20 text-cyan-400 border-2 border-cyan-400/50;
+  }
+  
+  .achievement-details {
+    flex: 1;
+  }
+  
+  .achievement-title {
+    @apply text-lg font-orbitron text-cyan-400 mb-1;
+  }
+  
+  .achievement-date {
+    @apply text-magenta-400 font-mono text-sm mb-2;
+  }
+  
+  .achievement-desc {
+    @apply text-gray-400 font-mono text-sm;
+  }
+  
+  .cert-card {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg overflow-hidden;
+    @apply hover:border-magenta-400/50 transition-all duration-300;
+    backdrop-filter: blur(10px);
+  }
+  
+  .cert-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+  }
+  
+  .cert-placeholder {
+    @apply bg-gradient-to-br from-cyan-500/10 to-magenta-500/10 p-8 text-center;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .cert-placeholder-text {
+    @apply text-4xl font-orbitron text-cyan-400 mb-2;
+  }
+  
+  .cert-placeholder-subtitle {
+    @apply text-gray-400 font-mono text-xs;
+  }
+  
+  .cert-info {
+    @apply p-4 text-center;
+  }
+  
+  .cert-holder {
+    @apply text-magenta-400 font-mono text-sm mb-1;
+  }
+  
+  .cert-instructions {
+    @apply text-gray-500 font-mono text-xs italic;
+  }
+  
+  /* For real cert images */
+  .cert-card-img {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg overflow-hidden;
+    @apply hover:border-magenta-400/50 transition-all duration-300;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cert-card-img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+  }
+  
+  .cert-image {
+    @apply w-full;
+    height: 200px;
+    object-fit: cover;
+    filter: brightness(1.05) contrast(1.05);
+  }
+  
+  /* Global lightbox handles all cert images now */
+  
+  .achievement-badge {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg p-6;
+    @apply hover:border-magenta-400/50 transition-all duration-300;
+    backdrop-filter: blur(10px);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .achievement-badge:hover {
+    transform: translateX(4px);
+  }
+  
+  .achievement-badge:hover .badge-icon {
+    animation: iconSpin 0.5s ease-in-out;
+  }
+  
+  @keyframes iconSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.15); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+  
+  .badge-title {
+    @apply text-lg font-orbitron text-cyan-400 mb-2;
+  }
+  
+  .badge-desc {
+    @apply text-gray-400 font-mono text-sm;
+  }
+  
+  /* No platforms connected state */
+  .no-data-card {
+    @apply bg-black/50 border border-cyan-500/30 rounded-lg p-8 text-center;
+    backdrop-filter: blur(10px);
+  }
+  
+  .no-data-icon {
+    @apply text-6xl mb-4;
+    filter: brightness(1.2) contrast(1.1) saturate(1.3);
+  }
+  
+  .no-data-title {
+    @apply text-2xl font-orbitron text-cyan-400 mb-3;
+  }
+  
+  .no-data-desc {
+    @apply text-gray-400 font-mono mb-4 max-w-2xl mx-auto;
+  }
+  
+  .no-data-instructions {
+    @apply text-magenta-400 font-mono text-sm mb-3;
+  }
+  
+  .no-data-list {
+    @apply text-left max-w-xl mx-auto space-y-2 text-gray-400 font-mono text-sm;
+  }
+  
+  .no-data-list code {
+    @apply bg-black/50 border border-cyan-500/30 px-2 py-1 rounded text-xs;
+  }
+</style>
+
+<!-- Global lightbox handles all image clicks now - no custom script needed -->

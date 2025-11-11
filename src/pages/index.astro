@@ -1,0 +1,403 @@
+<!--
+┌── Message from havoc ────────────────────────────────────────────────────┐
+│                                                                                │
+│   Hello, me and my team have spent countless hours in designing this website   │
+│   Please don't copy it, make something original from scratch                   │
+│   It is not that hard really!!                                                 │
+│                                                                                │
+└────────────────────────────────────────────────────────────────────────────────┘
+-->
+---
+import Layout from '../layouts/Layout.astro';
+import GlitchIntro from '../components/GlitchIntro.astro';
+import WriteupCard from '../components/WriteupCard.astro';
+import { getCollection } from 'astro:content';
+
+const allWriteups = await getCollection('writeups');
+const latestWriteups = allWriteups
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+---
+
+<Layout title="NexoLabs - Decrypt. Dissect. Dominate.">
+  <GlitchIntro />
+  
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center px-6">
+    <div class="container mx-auto text-center z-10">
+      <h1 class="text-6xl md:text-8xl font-orbitron text-cyan-400 mb-6 hero-glitch">
+        NEXOLABS
+      </h1>
+      <p class="text-xl md:text-3xl text-magenta-400 mb-4 font-mono tracking-wider decode-text-slow" data-text="CTF Team. Reverse Engineers. Innovators.">
+        CTF Team. Reverse Engineers. Innovators.
+      </p>
+      <p class="text-cyan-400 text-lg font-mono tracking-wider decode-text-slow" data-text="Decrypt. Dissect. Dominate.">
+        Decrypt. Dissect. Dominate.
+      </p>
+      
+      <div class="mt-12 flex gap-6 justify-center flex-wrap">
+        <a href="#writeups" class="cyber-button">
+          View Writeups
+        </a>
+        <a href="/about" class="cyber-button-outline">
+          Meet the Team
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-20 px-6 relative">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-4xl font-orbitron text-cyan-400 mb-8 section-title">
+        <span class="text-magenta-400">//</span> About Us
+      </h2>
+      <div class="bg-black/50 border border-cyan-500/30 rounded-lg p-8 backdrop-blur-md">
+        <p class="text-gray-300 text-lg leading-relaxed font-mono">
+          NexoLabs is a cybersecurity collective specializing in Capture The Flag competitions 
+          and penetration testing. We dissect vulnerabilities, reverse engineer complex systems, 
+          and push the boundaries of what's possible in offensive security. Our mission is to 
+          share knowledge through detailed technical writeups and establish ourselves as 
+          thought leaders in the cybersecurity community.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Writeups Section -->
+  <section id="writeups" class="py-20 px-6 relative">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-orbitron text-cyan-400 mb-12 section-title">
+        <span class="text-magenta-400">//</span> Latest Writeups
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {latestWriteups.map((writeup) => (
+          <WriteupCard
+            title={writeup.data.title}
+            category={writeup.data.category}
+            difficulty={writeup.data.difficulty}
+            author={writeup.data.author}
+            date={writeup.data.date}
+            slug={writeup.slug}
+            description={writeup.data.description}
+          />
+        ))}
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="/writeups" class="cyber-button">
+          View All Writeups
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section class="py-20 px-6 relative">
+    <div class="container mx-auto">
+      <h2 class="text-4xl font-orbitron text-cyan-400 mb-12 section-title">
+        <span class="text-magenta-400">//</span> Achievements
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="achievement-card" data-tilt>
+          <div class="text-5xl font-orbitron text-cyan-400 mb-4">50+</div>
+          <div class="text-gray-400 font-mono">CTF Challenges Solved</div>
+        </div>
+        
+        <div class="achievement-card" data-tilt>
+          <div class="text-5xl font-orbitron text-magenta-400 mb-4">Top 100</div>
+          <div class="text-gray-400 font-mono">CTFTime Ranking</div>
+        </div>
+        
+        <div class="achievement-card" data-tilt>
+          <div class="text-5xl font-orbitron text-purple-400 mb-4">25+</div>
+          <div class="text-gray-400 font-mono">Technical Writeups</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connect Section -->
+  <section class="py-20 px-6 relative">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-orbitron text-cyan-400 mb-12 section-title">
+        <span class="text-magenta-400">//</span> Connect
+      </h2>
+      
+      <div class="flex flex-wrap justify-center gap-6">
+        <a href="https://github.com/nexolab-team/" target="_blank" class="connect-link" data-tilt-connect>
+          <span class="text-2xl">→</span> GitHub
+        </a>
+        <a href="https://ctftime.org/team/409004" target="_blank" class="connect-link" data-tilt-connect>
+          <span class="text-2xl">→</span> CTFTime
+        </a>
+        <a href="#" target="_blank" class="connect-link" data-tilt-connect>
+          <span class="text-2xl">→</span> Discord
+        </a>
+        <a href="#" target="_blank" class="connect-link" data-tilt-connect>
+          <span class="text-2xl">→</span> Twitter/X
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero-glitch {
+    text-shadow: 
+      0 0 10px #00ffff,
+      0 0 20px #00ffff,
+      0 0 40px #00ffff,
+      0 0 80px #00ffff;
+    animation: hero-pulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes hero-pulse {
+    0%, 100% {
+      text-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 40px #00ffff;
+    }
+    50% {
+      text-shadow: 
+        0 0 20px #ff00ff,
+        0 0 40px #ff00ff,
+        0 0 60px #ff00ff,
+        0 0 100px #ff00ff;
+    }
+  }
+  
+  .section-title {
+    position: relative;
+    padding-bottom: 1rem;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+  }
+  
+  .cyber-button {
+    @apply px-8 py-4 bg-cyan-500/20 border-2 border-cyan-400 text-cyan-400;
+    @apply font-mono uppercase tracking-wider rounded-lg;
+    @apply hover:bg-cyan-400 hover:text-black transition-all duration-300;
+    display: inline-block;
+    text-shadow: 0 0 10px currentColor;
+  }
+  
+  .cyber-button:hover {
+    box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+  }
+  
+  .cyber-button-outline {
+    @apply px-8 py-4 border-2 border-magenta-400 text-magenta-400;
+    @apply font-mono uppercase tracking-wider rounded-lg;
+    @apply hover:bg-magenta-400 hover:text-black transition-all duration-300;
+    display: inline-block;
+    text-shadow: 0 0 10px currentColor;
+  }
+  
+  .cyber-button-outline:hover {
+    box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+  }
+  
+  .achievement-card {
+    @apply relative rounded-xl p-8 text-center;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(10, 10, 30, 0.9) 100%);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transform-style: preserve-3d;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 255, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: 0.75rem;
+  }
+  
+  .achievement-card:hover::before {
+    opacity: 1;
+  }
+  
+  .achievement-card:hover {
+    border-color: rgba(255, 0, 255, 0.5);
+    box-shadow: 
+      0 20px 40px rgba(0, 255, 255, 0.2),
+      0 0 60px rgba(255, 0, 255, 0.15),
+      inset 0 0 40px rgba(0, 255, 255, 0.05);
+  }
+  
+  .achievement-card .text-5xl {
+    transform: translateZ(30px);
+    filter: drop-shadow(0 0 10px currentColor);
+    transition: filter 0.3s ease;
+  }
+  
+  .achievement-card:hover .text-5xl {
+    filter: drop-shadow(0 0 20px currentColor);
+  }
+  
+  .connect-link {
+    @apply relative px-8 py-4 text-xl rounded-xl;
+    @apply font-mono transition-all duration-300;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(10, 10, 30, 0.8) 100%);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #00ffff;
+    display: inline-block;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+  
+  .connect-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .connect-link span {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  .connect-link:hover {
+    border-color: rgba(255, 0, 255, 0.6);
+    color: #ff00ff;
+    box-shadow: 
+      0 0 30px rgba(255, 0, 255, 0.4),
+      inset 0 0 20px rgba(255, 0, 255, 0.1);
+    text-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+  }
+  
+  .connect-link:hover::before {
+    opacity: 1;
+  }
+  
+  .connect-link:hover span {
+    transform: translateX(5px);
+  }
+</style>
+
+<script>
+  // Unified decoding animation for hero text
+  (function () {
+    const scrambleChars = '!<>-_\\/[]{}—=+*^?#0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+
+    function scramble(finalText: string, duration: number = 2000, onUpdate: (text: string) => void): Promise<void> {
+      const start = Date.now();
+      const len = finalText.length;
+
+      return new Promise((resolve) => {
+        (function frame() {
+          const now = Date.now();
+          const progress = Math.min((now - start) / duration, 1);
+
+          let out = '';
+          for (let i = 0; i < len; i++) {
+            const revealAt = (i / len) - (1 - progress) * 0.5;
+            if (revealAt <= 0) {
+              out += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+            } else {
+              out += finalText[i];
+            }
+          }
+
+          onUpdate(out);
+
+          if (progress < 1) {
+            requestAnimationFrame(frame);
+          } else {
+            // Ensure final text is exact after animation completes
+            onUpdate(finalText);
+            resolve();
+          }
+        })();
+      });
+    }
+
+    // Decode all elements with data-text attributes
+    async function decodeAll() {
+      // Wait briefly to allow the GlitchIntro to finish (it removes itself after animation)
+      await new Promise<void>(r => setTimeout(r, 1800));
+
+      const elems = document.querySelectorAll<HTMLElement>('.decode-text');
+      for (let i = 0; i < elems.length; i++) {
+        const el = elems[i];
+        const text = el.getAttribute('data-text') || el.textContent || '';
+        // small stagger per element
+        await new Promise<void>(r => setTimeout(r, i * 300));
+        await scramble(text, 1800, (out: string) => { el.textContent = out; });
+      }
+
+      const slow = document.querySelectorAll<HTMLElement>('.decode-text-slow');
+      for (let i = 0; i < slow.length; i++) {
+        const el = slow[i];
+        const text = el.getAttribute('data-text') || el.textContent || '';
+        await new Promise<void>(r => setTimeout(r, 300));
+        await scramble(text, 2400, (out: string) => { el.textContent = out; });
+      }
+    }
+
+    window.addEventListener('load', decodeAll);
+  })();
+</script>
+
+<script>
+  import VanillaTilt from 'vanilla-tilt';
+  
+  // Initialize Vanilla Tilt on achievement cards and connect links
+  document.addEventListener('DOMContentLoaded', () => {
+    // Achievement cards with moderate tilt
+    const achievementCards = document.querySelectorAll<HTMLElement>('[data-tilt]');
+    VanillaTilt.init(Array.from(achievementCards), {
+      max: 12,              // Max tilt rotation (degrees)
+      speed: 400,           // Speed of the enter/exit transition
+      glare: true,          // Enable glare effect
+      'max-glare': 0.4,     // Max glare opacity
+      scale: 1.05,          // Scale on hover
+      perspective: 1000,    // Perspective value
+      gyroscope: false,     // Disable gyroscope
+      reset: true,          // Reset on exit
+      easing: 'cubic-bezier(.03,.98,.52,.99)',
+    });
+    
+    // Connect links with more subtle tilt
+    const connectLinks = document.querySelectorAll<HTMLElement>('[data-tilt-connect]');
+    VanillaTilt.init(Array.from(connectLinks), {
+      max: 8,               // Max tilt rotation (degrees) - more subtle
+      speed: 500,           // Slightly slower transition
+      glare: true,          // Enable glare effect
+      'max-glare': 0.3,     // Max glare opacity
+      scale: 1.08,          // Slightly larger scale
+      perspective: 1200,    // Perspective value
+      gyroscope: false,     // Disable gyroscope
+      reset: true,          // Reset on exit
+      easing: 'cubic-bezier(.03,.98,.52,.99)',
+    });
+  });
+</script>
+

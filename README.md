@@ -4,7 +4,7 @@
 <a href="https://github.com/nexolab-team/nexolabs"><img src="public/assets/avatars/git.png" width="400" /></a><br />
 <i>Modern CTF team website with cyberpunk aesthetics</i><br />
 <i>Showcase writeups, achievements, and team members</i><br /><br />
-<b>🌐 <a href="https://nexolab-team.github.io/nexolabs">nexolab-team.github.io/nexolabs</a></b>
+<b>🌐 <a href="https://nexolab-team.github.io/nexolabs/">nexolab-team.github.io/nexolabs</a></b>
 </p>
 
 <p align="center">

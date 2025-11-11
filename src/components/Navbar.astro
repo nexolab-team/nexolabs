@@ -8,21 +8,22 @@
 └────────────────────────────────────────────────────────────────────────────────┘
 -->
 ---
+const base = import.meta.env.BASE_URL || '';
 ---
 
 <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-cyan-500/30">
   <div class="container mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
-      <a href="/" class="text-2xl font-bold font-orbitron glitch-text">
+      <a href={`${base}/`} class="text-2xl font-bold font-orbitron glitch-text">
         NEXOLABS
       </a>
       
       <!-- Desktop Menu -->
       <div class="hidden md:flex gap-8 items-center">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/about" class="nav-link">About</a>
-        <a href="/writeups" class="nav-link">Writeups</a>
-        <a href="/achievements" class="nav-link">Achievements</a>
+        <a href={`${base}/`} class="nav-link">Home</a>
+        <a href={`${base}/about`} class="nav-link">About</a>
+        <a href={`${base}/writeups`} class="nav-link">Writeups</a>
+        <a href={`${base}/achievements`} class="nav-link">Achievements</a>
         <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
           <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"></circle>
@@ -51,10 +52,10 @@
     
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="mobile-menu">
-      <a href="/" class="mobile-nav-link">Home</a>
-      <a href="/about" class="mobile-nav-link">About</a>
-      <a href="/writeups" class="mobile-nav-link">Writeups</a>
-      <a href="/achievements" class="mobile-nav-link">Achievements</a>
+      <a href={`${base}/`} class="mobile-nav-link">Home</a>
+      <a href={`${base}/about`} class="mobile-nav-link">About</a>
+      <a href={`${base}/writeups`} class="mobile-nav-link">Writeups</a>
+      <a href={`${base}/achievements`} class="mobile-nav-link">Achievements</a>
       <button id="themeToggleMobile" class="theme-toggle mobile">
         <span class="theme-label">Theme</span>
         <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
